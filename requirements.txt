@@ -1,3 +1,4 @@
 scikit-learn==0.20.0
 joblib
 connexion[swagger-ui]
+imbalanced-learn
