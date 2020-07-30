@@ -1,0 +1,68 @@
+swagger: "2.0"
+info:
+  title: News Classification API
+  version: "0.1"
+  description: An API that can classify news based on headline
+
+paths:
+  /health:
+    get:
+      summary: Checks the health of the service
+      description: Returns the health status of the service
+      operationId: news_classification_api.health
+      responses:
+        "200":
+          description: Service is healthy
+        "500":
+          description: Service is unhealthy
+
+  /categories:
+    get:
+      summary: Get all possible categories of the prediction
+      description: Returns all the categories
+      operationId: news_classification_api.categories
+      responses:
+        "200":
+          description: Categories returned successfully
+        "500":
+          description: Unable to get categories
+
+  /predict:
+    post:
+      summary: Predict one news category given a headline
+      operationId: news_classification_api.predict
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: headline
+          required: true
+          description: The news headline
+          type: string
+      responses:
+        "200":
+          description: Classification performed successfully
+        "500":
+          description: Unable to perform the classification
+
+  /tag:
+    post:
+      summary: Predict multiple news categories given a news headline
+      operationId: news_classification_api.tag
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: headline
+          required: true
+          description: The news headline
+          type: string
+      responses:
+        "200":
+          description: Classification performed successfully
+        "500":
+          description: Unable to perform the classification
