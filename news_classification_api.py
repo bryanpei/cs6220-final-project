@@ -13,6 +13,7 @@ clf = load("./model/model-predict.joblib")
 def health():
     # Test to make sure our service is actually healthy
     try:
+        categories()
         predict("Test news headline.")
         tag("Test news headline.")
     except Exception:
@@ -43,7 +44,7 @@ def tag(headline: str):
     min_proba = 0.4
     proba = clf.predict_proba([headline])
     predictions = []
-    for i, p in enumerate(proba):
+    for i, p in enumerate(proba[0]):
         if p >= min_proba:
             predictions.append(clf.classes_[i])
 
@@ -56,5 +57,4 @@ app.add_api("news_classification_api.yaml")
 
 # Start the app
 if __name__ == "__main__":
-    print(categories())
     app.run()
